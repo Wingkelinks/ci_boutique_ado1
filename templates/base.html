@@ -10,9 +10,9 @@
 				name="viewport"
 				content="width=device-width, initial-scale=1, shrink-to-fit=no"
 			/>
-		{% endblock %} 
+		{% endblock %}
 
-		{% block extra_css %}
+		{% block extra_meta %}
 		{% endblock %}
 
 		{% block corecss %}
@@ -22,9 +22,26 @@
 				integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
 				crossorigin="anonymous"
 			/>
-		{% endblock %} 
-		
+			<link 
+				rel="preconnect" 
+				href="https://fonts.googleapis.com">
+			<link 
+				rel="preconnect" 
+				href="https://fonts.gstatic.com" crossorigin>
+			<link 
+				rel="stylesheet" 
+				href="https://fonts.googleapis.com/css2?family=Lato&display=swap">
+			<link 
+				rel="stylesheet" 
+				href="{% static 'css/base.css' %}">
+		{% endblock %}
+
+		{% block extra_css %}
+		{% endblock %}
+
 		{% block corejs %}
+			<script 
+				src="https://kit.fontawesome.com/23c2ad1397.js" crossorigin="anonymous"></script>
 			<script
 				src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
 				integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
@@ -49,7 +66,8 @@
 	</head>
 	<body>
 		<header class="container-fluid fixed-top">
-			<div class="row">
+			<div id="topnav"
+			class="row bg-white pt-lg-2 d-none d-lg-flex">
 				<div class="col-12 col-lg-4 my-auto py-1 py-lg-0 text-center text-lg-left">
 					<a href="{% url 'home' %}" class="nav-link main-logo-link">
 						<h2 class="logo-font text-black my-0"><strong>Boutique</strong> Ado
@@ -75,12 +93,12 @@
 				<div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
 					<ul class="list-inline list-unstyled text-center text-lg-right my-0">
 						<li class="list-inline-item dropdown">
-							<a 
-							href="#" 
-							class="text-black nav-link" 
-							id="user-options" 
-							data-toggle="dropdown" 
-							aria-haspopup="true" 
+							<a
+							href="#"
+							class="text-black nav-link"
+							id="user-options"
+							data-toggle="dropdown"
+							aria-haspopup="true"
 							aria-expanded="false">
 								<div class="text-center">
 									<div>
@@ -92,31 +110,31 @@
 							<div class="dropdown-menu border-0" aria-labelledby="user-options">
 								{% if request.user.is_authenticated %}
 									{% if request.user.is_superuser %}
-										<a 
-										href="" 
+										<a
+										href=""
 										class="dropdown-item">Product Management
 										</a>
 									{% endif %}
-									<a 
-									href="" 
+									<a
+									href=""
 									class="dropdown-item">My Profile
 									</a>
-									<a 
+									<a
 									href="{% url 'account_logout' %}" class="dropdown-item">Logout
 									</a>
 								{% else %}
-									<a 
-									href="{% url 'account_signup' %}" class="dropdown-item">Register	
+									<a
+									href="{% url 'account_signup' %}" class="dropdown-item">Register
 									</a>
-									<a 
-									href="{% url 'account_login' %}" class="dropdown-item">Login	
+									<a
+									href="{% url 'account_login' %}" class="dropdown-item">Login
 									</a>
 								{% endif %}
 							</div>
 						</li>
 						<li class="list-inline-item">
-							<a 
-							class="{% if grand_total %}text-info font-weight-bold{% else %}text-black{% endif %} nav-link" 
+							<a
+							class="{% if grand_total %}text-info font-weight-bold{% else %}text-black{% endif %} nav-link"
 							href="">
 								<div class="text-center">
 									<div>
