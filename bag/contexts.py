@@ -1,7 +1,9 @@
 # decimal better than float for money as float susceptible to rounding errors
 from boutique_ado.settings import FREE_DELIVERY_THRESHOLD
 from decimal import Decimal  
-from django.conf import settings 
+from django.conf import settings
+from django.shortcuts import get_object_or_404
+from products.models import Product
 
 
 """ Rather than return a template, this function will return a dictionary called context. This is known as a context processor which serves to make the dictionary available to all templates across the entire application (by putting it in settings.py) """
@@ -11,6 +13,18 @@ def bag_contents(request):
     bag_items = []
     total = 0
     product_count = 0
+    bag = request.session.get('bag', {})
+    
+    for item_id, quantity in bag.items(): # for each item & quantities in bag in session
+        product = get_object_or_404(Product, pk=item_id) # get the product 
+        total += quantity * product.price # add quantity and multiply by price
+        product_count += quantity # increment product count by quantity
+        # add a dictionary to list of bag items containing id, quantity & product object to be able to access other product fields
+        bag_items.append({ 
+            'item_id': item_id,
+            'quantity': quantity,
+            'product': product,
+        })
     
     if total < settings.FREE_DELIVERY_THRESHOLD:
         delivery = total * Decimal(settings.STANDARD_DELIVERY_PERCENTAGE/100)
