@@ -111,7 +111,7 @@
 								{% if request.user.is_authenticated %}
 									{% if request.user.is_superuser %}
 										<a
-										href=""
+										href="{% url 'add_product' %}"
 										class="dropdown-item">Product Management
 										</a>
 									{% endif %}
