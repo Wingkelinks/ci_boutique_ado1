@@ -14,6 +14,7 @@ import builtins
 from pathlib import Path
 import os
 from os import path
+import dj_database_url
 if path.exists("env.py"):
     import env
 
@@ -130,6 +131,7 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
 
 
 # Password validation
