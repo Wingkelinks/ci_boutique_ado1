@@ -12,6 +12,7 @@ stripe = "*"
 django-countries = "*"
 dj-database-url = "*"
 psycopg2-binary = "*"
+gunicorn = "*"
 
 [dev-packages]
 pylint = "*"
