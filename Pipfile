@@ -11,8 +11,8 @@ django-crispy-forms = "*"
 stripe = "*"
 django-countries = "*"
 dj-database-url = "*"
-psycopg2-binary = "*"
 gunicorn = "*"
+psycopg2-binary = "*"
 
 [dev-packages]
 pylint = "*"
