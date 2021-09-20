@@ -19,6 +19,7 @@ class CategoryAdmin(admin.ModelAdmin):
         'friendly_name',
         'name',
     )
-    
+
+
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Category, CategoryAdmin)

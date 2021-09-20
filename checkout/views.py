@@ -17,6 +17,7 @@ import os
 import stripe
 import json
 
+
 @require_POST
 def cache_checkout_data(request):
     try:
@@ -32,6 +33,7 @@ def cache_checkout_data(request):
         messages.error(request, 'Sorry, your payment cannot be \
             processed right now. Please try again later.')
         return HttpResponse(content=e, status=400)
+
 
 def checkout(request):
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
@@ -79,14 +81,15 @@ def checkout(request):
                             order_line_item.save()
                 except Product.DoesNotExist:
                     messages.error(request, (
-                        "One of the products in your bag wasn't found in our database. "
+                        "One of the products in your bag wasn't found in our database."
                         "Please call us for assistance!")
                     )
                     order.delete()
                     return redirect(reverse('view_bag'))
 
             request.session['save_info'] = 'save-info' in request.POST
-            return redirect(reverse('checkout_success', args=[order.order_number]))
+            return redirect(reverse('checkout_success',
+                                    args=[order.order_number]))
         else:
             messages.error(request, 'There was an error with your form. \
                 Please double check your information.')
@@ -127,7 +130,7 @@ def checkout_success(request, order_number):
     """
     save_info = request.session.get('save_info')
     order = get_object_or_404(Order, order_number=order_number)
-    
+   
     if request.user.is_authenticated:
         profile = UserProfile.objects.get(user=request.user)
         # Attach the user's profile to the order
@@ -148,7 +151,7 @@ def checkout_success(request, order_number):
             user_profile_form = UserProfileForm(profile_data, instance=profile)
             if user_profile_form.is_valid():
                 user_profile_form.save()
-    
+
     messages.success(request, f'Order successfully processed! \
         Your order number is {order_number}. A confirmation \
         email will be sent to {order.email}.')
