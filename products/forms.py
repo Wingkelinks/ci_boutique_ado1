@@ -1,5 +1,4 @@
 from django import forms
-from django.forms import widgets
 from .widgets import CustomClearableFileInput
 from .models import Product, Category
 
@@ -10,11 +9,13 @@ class ProductForm(forms.ModelForm):
         model = Product
         fields = '__all__'
 
-    image = forms.ImageField(label='Image', required=False, widget=CustomClearableFileInput)
+    image = forms.ImageField(label='Image',
+                             required=False, widget=CustomClearableFileInput)
 
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs) # overide init method to make changes to fields
-        categories = Category.objects.all() 
+        super().__init__(*args, **kwargs)
+        # overide init method to make changes to fields
+        categories = Category.objects.all()
         # get all categories and
         # create list of tuples of friendly names associated with category ids
         friendly_names = [(c.id, c.get_friendly_name()) for c in categories]

@@ -1,8 +1,8 @@
 from django.contrib import admin
-from django.contrib.admin.options import ModelAdmin
 from .models import Category, Product
 
 # Register your models here.
+
 
 class ProductAdmin(admin.ModelAdmin):
     list_display = (
@@ -13,6 +13,7 @@ class ProductAdmin(admin.ModelAdmin):
         'rating',
         'image',
     )
+
 
 class CategoryAdmin(admin.ModelAdmin):
     list_display = (
